@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.socket.io/4.0.2/socket.io.min.js"
+        integrity="sha384-Bkt72xz1toXkj/oEiOgkQwWKbvNYxTNWMqdon3ejP6gwq53zSo48nW5xACmeDV0F" crossorigin="anonymous">
+    </script>
+    <script src="./js/MainUI.js"></script>
+    <title>Compare</title>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <h1 class="text-center">Price Compare</h1>
+        <div class="row">
+            <div class="col-8">
+                <div class="input-group mb-3">
+                    <input id="url" type="text" class="form-control" placeholder="Recipient's username"
+                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary add-url" type="button">Add URL</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group mb-3">
+                    <input id="price" type="text" class="form-control" placeholder="Recipient's username"
+                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary change-price" type="button">Change Price</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex">
+                <label class="switch">
+                    <input type="checkbox" id="sound-check">
+                    <span class="slider round"></span>
+                </label>
+                <div class="switch-label">Sound</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">URL</th>
+                            <th scope="col">Min Price</th>
+                            <th scope="col">Max Price</th>
+                            <th scope="col">Rate</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="url-table">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <audio id="xyz" src="./sound/mixkit-doorbell-single-press-333.wav" preload="auto"></audio>
+        <button class="d-none play-sound"></button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const cui = new MainUI()
+            cui.init()
+        }) 
+        
+    </script>
+
+</body>
+
+</html>
