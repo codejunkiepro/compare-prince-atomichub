@@ -11,7 +11,7 @@ class MainUI {
             $(`[data-url="${url}"] td:nth-child(2)`).html(price1)
             $(`[data-url="${url}"] td:nth-child(3)`).html(price2)
             $(`[data-url="${url}"] td:nth-child(4)`).html(rate + '%')
-            $(`[data-url="${url}"] td:nth-child(4)`).html('Yes')
+            $(`[data-url="${url}"] td:nth-child(5)`).html('Yes')
             $('.play-sound').click()
             alert(`Fetch: ${url}`)
         })
