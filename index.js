@@ -67,7 +67,7 @@ io.on("connection", (socket) => {
 })
 
 const scrappingTool = async () => {
-    const browser = await puppeteer.launch({ headless: true, args: ['no-sandbox', "--window-size=1600,1000"] })
+    const browser = await puppeteer.launch({ headless: true, args: ['no-sandbox'] })
     try {
         
 
@@ -90,7 +90,7 @@ const scrappingTool = async () => {
 const sendResultUsingSocket = async (browser, url, variable) => {
     try {
         const page = await browser.newPage()
-        await page.setViewport({ width: 1600, height: 700 })
+        // await page.setViewport({ width: 1600, height: 700 })
         await page.setDefaultNavigationTimeout(0);
         // const result = await getResult(page, fileContent[0])
         // const url = fileContent[0]
