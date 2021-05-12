@@ -20,7 +20,7 @@ class MainUI {
             $(`[data-url="${url}"] td:nth-child(3)`).html(price2)
             $(`[data-url="${url}"] td:nth-child(4)`).html(rate + '%')
             $(`[data-url="${url}"] td:nth-child(5)`).html('No')
-            $('.play-sound').click()
+            // $('.play-sound').click()
         })
 
         this._socket.on('hello', (str) => {
