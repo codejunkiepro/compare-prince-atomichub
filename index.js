@@ -48,6 +48,14 @@ io.on("connection", (socket) => {
         fs.writeFileSync('./urls.json', fileContent, 'utf8')
     })
 
+    socket.on('delete-url', (url) => {
+        let fileContent = fs.readFileSync('./urls.json', 'utf8');
+        fileContent = JSON.parse(fileContent)
+        fileContent.filter(item => item != url)
+        fileContent = JSON.stringify(fileContent, null, 2)
+        fs.writeFileSync('./urls.json', fileContent, 'utf8')
+    })
+
     socket.on('change-price', (rate) => {
         let variable = fs.readFileSync('./variable.json', 'utf8');
         variable = JSON.parse(variable)

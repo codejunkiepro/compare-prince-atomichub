@@ -39,6 +39,7 @@ class MainUI {
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td><buton class="remove-url btn btn-danger btn-sm">Delete</button></td>
                         </tr>
                     `)
                 })
@@ -67,6 +68,7 @@ class MainUI {
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td><buton class="remove-url btn btn-danger">Delete</button></td>
                         </tr>
                     `)
             } else {
@@ -93,6 +95,19 @@ class MainUI {
             } else {
                 alert('Got some issues')
                 $('.add-url').prop('disabled', true)
+            }
+        })
+
+        const _self = this
+
+        $(document).on('click', '.remove-url', function() {
+            if(confirm('Are you sure to delete?')) {
+                const url = $(this).parent().parent().data('url');
+                // console.log(url)
+                _self._urls = _self._urls.filter(item => item !== url);
+                _self._socket.emit('delete-url', url);
+
+                $(this).parent().parent().remove()
             }
         })
     }
