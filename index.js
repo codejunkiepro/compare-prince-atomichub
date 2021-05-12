@@ -27,9 +27,10 @@ const server = app.listen(PORT, () => console.log('Application listening at port
 const io = socketIo(server);
 
 app.io = io;
+let plag = false
 
-let interval = setInterval(() => {
-    scrappingTool()
+setInterval(() => {
+    if(!plag) scrappingTool()
 }, 1000 * 60 * 3); // 3 minites
 
 io.on("connection", (socket) => {
@@ -67,6 +68,7 @@ io.on("connection", (socket) => {
 })
 
 const scrappingTool = async () => {
+    plag = true
     const browser = await puppeteer.launch({ headless: true, args: ['no-sandbox'] })
     try {
         
@@ -79,9 +81,10 @@ const scrappingTool = async () => {
         for (let url of fileContent) {
             await sendResultUsingSocket(browser, url, variable)
         }
-
+        plag = false
         await browser.close()
     } catch (error) {
+        plag = false
         await browser.close()
         console.log(error)
     }
