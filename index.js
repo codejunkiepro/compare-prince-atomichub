@@ -49,6 +49,7 @@ io.on("connection", (socket) => {
     })
 
     socket.on('delete-url', (url) => {
+        console.log('delete-url', url)
         let fileContent = fs.readFileSync('./urls.json', 'utf8');
         fileContent = JSON.parse(fileContent)
         fileContent.filter(item => item != url)

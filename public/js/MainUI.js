@@ -1,7 +1,7 @@
 class MainUI {
     constructor() {
         this._socket = io()
-        this._urls = null
+        this._urls = []
     }
 
     init() {
@@ -13,7 +13,7 @@ class MainUI {
             $(`[data-url="${url}"] td:nth-child(4)`).html(rate + '%')
             $(`[data-url="${url}"] td:nth-child(5)`).html('Yes')
             $('.play-sound').click()
-            alert(`Fetch: ${url}`)
+            this.alert(`Fetch One Status!`)
         })
 
         this._socket.on('unFall', (url, price1, price2, rate) => {
@@ -22,6 +22,7 @@ class MainUI {
             $(`[data-url="${url}"] td:nth-child(4)`).html(rate + '%')
             $(`[data-url="${url}"] td:nth-child(5)`).html('No')
             // $('.play-sound').click()
+            // this.alert(`Fetch One Status!`)
         })
 
         this._socket.on('hello', (str) => {
@@ -29,9 +30,18 @@ class MainUI {
         })
 
         this._socket.on('start', (urls, variables) => {
-            this._urls = urls
-            if (urls && urls.length) {
-                urls.forEach(url => {
+            // this._urls = urls
+            this._urls = this._urls.filter(url => urls.includes(url))
+            const newUrls = []
+            urls.forEach(url => {
+                if (!this._urls.includes(url)) { 
+                    this._urls.push(url)
+                    newUrls.push(url)
+                }
+            })
+
+            if (this._urls && this._urls.length) {
+                newUrls.forEach(url => {
                     $('.url-table').append(`
                         <tr data-url="${url}">
                             <td><a href="${url}" target="_blank">${url}</a></td>
@@ -110,5 +120,9 @@ class MainUI {
                 $(this).parent().parent().remove()
             }
         })
+    }
+
+    alert(msg) {
+        $.notify(msg)
     }
 }

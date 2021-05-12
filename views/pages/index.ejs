@@ -20,6 +20,10 @@
     <script src="https://cdn.socket.io/4.0.2/socket.io.min.js"
         integrity="sha384-Bkt72xz1toXkj/oEiOgkQwWKbvNYxTNWMqdon3ejP6gwq53zSo48nW5xACmeDV0F" crossorigin="anonymous">
     </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js">
+    </script>
+    
     <script src="./js/MainUI.js"></script>
     <title>Compare</title>
 </head>
@@ -77,10 +81,17 @@
         </div>
         <audio id="xyz" src="./sound/mixkit-doorbell-single-press-333.wav" preload="auto"></audio>
         <button class="d-none play-sound"></button>
+        <div class="alert alert-primary" role="alert" id="success-alert">
+            Fetch One Status!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
 
     <script>
         $(document).ready(function() {
+            $('#success-alert').hide()
             const cui = new MainUI()
             cui.init()
         }) 
