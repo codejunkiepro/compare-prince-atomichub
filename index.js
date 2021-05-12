@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
     const content = fs.readFileSync('./urls.json', 'utf8')
     let variables = fs.readFileSync('./variable.json', 'utf8')
     variables = JSON.parse(variables)
-    io.emit('start', JSON.parse(content), variables)
+    socket.emit('start', JSON.parse(content), variables)
 
     socket.on('add-url', (url) => {
         let fileContent = fs.readFileSync('./urls.json', 'utf8');
@@ -110,7 +110,7 @@ const sendResultUsingSocket = async (browser, url, variable) => {
             secondPrice = parseFloat(secondPrice)
             const prices = [firstPrice, secondPrice];
             console.log(Math.max(...prices), prices)
-            if (Math.min(...prices) <= Math.max(...prices) * (variable.rate / 100)) {
+            if (Math.min(...prices) <= Math.max(...prices) * ((100 - variable.rate) / 100)) {
                 io.emit('fall', url, Math.min(...prices), Math.max(...prices), variable.rate)
             } else {
                 io.emit('unFall', url, Math.min(...prices), Math.max(...prices), variable.rate)
