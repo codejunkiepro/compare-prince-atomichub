@@ -13,6 +13,7 @@ class MainUI {
             $(`[data-url="${url}"] td:nth-child(4)`).html(rate + '%')
             $(`[data-url="${url}"] td:nth-child(4)`).html('Yes')
             $('.play-sound').click()
+            alert(`Fetch: ${url}`)
         })
 
         this._socket.on('unFall', (url, price1, price2, rate) => {
