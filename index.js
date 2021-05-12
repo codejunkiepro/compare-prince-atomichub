@@ -67,8 +67,9 @@ io.on("connection", (socket) => {
 })
 
 const scrappingTool = async () => {
+    const browser = await puppeteer.launch({ headless: true, args: ['no-sandbox', "--window-size=1600,1000"] })
     try {
-        const browser = await puppeteer.launch({ headless: true, args: ['no-sandbox', "--window-size=1600,1000"] })
+        
 
         let fileContent = await fs.readFileSync('./urls.json', 'utf8');
         fileContent = JSON.parse(fileContent)
@@ -81,6 +82,7 @@ const scrappingTool = async () => {
 
         await browser.close()
     } catch (error) {
+        await browser.close()
         console.log(error)
     }
 }
@@ -101,7 +103,7 @@ const sendResultUsingSocket = async (browser, url, variable) => {
         if (cookieBtn)
             await cookieBtn.click()
 
-        await page.waitForSelector('.large-card .asset-price.text-truncate', { timeout: 30000 })
+        await page.waitForSelector('.large-card .asset-price.text-truncate', { timeout: 10000 })
         console.log('Find large-card')
         const elements = await page.$$('.large-card .asset-price.text-truncate')
 
@@ -126,7 +128,7 @@ const sendResultUsingSocket = async (browser, url, variable) => {
             }
         }
     } catch (error) {
-        console.log(error)
+        throw new Error(error.message)
     }
 }
 
