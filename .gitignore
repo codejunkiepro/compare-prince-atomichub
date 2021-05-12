@@ -84,5 +84,5 @@ yarn.lock
 # Nuxt.js build / generate output
 .nuxt
 dist
-urls.json
-variables.json
+# urls.json
+# variable.json
