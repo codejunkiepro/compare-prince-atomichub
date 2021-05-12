@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
         console.log('delete-url', url)
         let fileContent = fs.readFileSync('./urls.json', 'utf8');
         fileContent = JSON.parse(fileContent)
-        fileContent.filter(item => item != url)
+        fileContent = fileContent.filter(item => item != url)
         fileContent = JSON.stringify(fileContent, null, 2)
         fs.writeFileSync('./urls.json', fileContent, 'utf8')
     })
@@ -106,7 +106,7 @@ const sendResultUsingSocket = async (browser, url, variable) => {
         if (cookieBtn)
             await cookieBtn.click()
 
-        await page.waitForSelector('.large-card .asset-price.text-truncate', { timeout: 10000 })
+        await page.waitForSelector('.large-card .asset-price.text-truncate', { timeout: 30000 })
         console.log('Find large-card')
         const elements = await page.$$('.large-card .asset-price.text-truncate')
 
