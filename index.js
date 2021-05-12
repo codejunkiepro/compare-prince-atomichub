@@ -91,8 +91,8 @@ const scrappingTool = async () => {
 }
 
 const sendResultUsingSocket = async (browser, url, variable) => {
-    try {
-        const page = await browser.newPage()
+    const page = await browser.newPage()
+    try {        
         // await page.setViewport({ width: 1600, height: 700 })
         await page.setDefaultNavigationTimeout(0);
         // const result = await getResult(page, fileContent[0])
@@ -130,8 +130,11 @@ const sendResultUsingSocket = async (browser, url, variable) => {
                 io.emit('unFall', url, Math.min(...prices), Math.max(...prices), variable.rate)
             }
         }
+
+        await page.close()
     } catch (error) {
-        throw new Error(error.message)
+        console.log(error)
+        await page.close()
     }
 }
 
